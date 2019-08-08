@@ -1,6 +1,6 @@
-package com.template.flows;
+package com.template.flows.queryable;
 
-import com.template.schema.PersistentHouse;
+import com.template.queryable.schema.PersistentHouse;
 import net.corda.core.flows.FlowException;
 import net.corda.core.flows.FlowLogic;
 import net.corda.core.flows.InitiatingFlow;

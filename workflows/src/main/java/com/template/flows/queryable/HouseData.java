@@ -1,4 +1,4 @@
-package com.template.flows.model;
+package com.template.flows.queryable.model;
 
 import net.corda.core.serialization.CordaSerializable;
 

@@ -1,16 +1,11 @@
-package com.template.states;
+package com.template.queryable.states;
 
 import com.google.common.collect.ImmutableList;
-import com.template.contracts.HouseContract;
-import com.template.schema.HouseSchemaV1;
-import com.template.schema.PersistentHouse;
+import com.template.queryable.contracts.HouseContract;
 import net.corda.core.contracts.BelongsToContract;
 import net.corda.core.contracts.ContractState;
 import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
-import net.corda.core.schemas.MappedSchema;
-import net.corda.core.schemas.PersistentState;
-import net.corda.core.schemas.QueryableState;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.template.schema;
+package com.template.queryable.schema;
 
 
 // Schema Family

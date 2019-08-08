@@ -1,4 +1,4 @@
-package com.template.schema;
+package com.template.queryable.schema;
 
 import com.google.common.collect.ImmutableList;
 import net.corda.core.schemas.MappedSchema;

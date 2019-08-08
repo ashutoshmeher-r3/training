@@ -1,17 +1,15 @@
-package com.template.flows;
+package com.template.flows.queryable;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.google.common.collect.ImmutableList;
-import com.template.contracts.HouseContract;
-import com.template.flows.model.HouseData;
-import com.template.states.HouseState;
+import com.template.queryable.contracts.HouseContract;
+import com.template.flows.queryable.model.HouseData;
+import com.template.queryable.states.HouseState;
 import net.corda.core.contracts.Command;
-import net.corda.core.contracts.CommandData;
 import net.corda.core.flows.*;
 import net.corda.core.identity.Party;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.core.transactions.TransactionBuilder;
-import net.corda.core.utilities.ProgressTracker;
 
 // ******************
 // * IssueHouseFlow flow *
