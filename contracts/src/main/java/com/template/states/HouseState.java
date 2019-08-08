@@ -5,6 +5,7 @@ import com.template.contracts.HouseContract;
 import com.template.schema.HouseSchemaV1;
 import com.template.schema.PersistentHouse;
 import net.corda.core.contracts.BelongsToContract;
+import net.corda.core.contracts.ContractState;
 import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
 import net.corda.core.schemas.MappedSchema;
@@ -18,7 +19,7 @@ import java.util.List;
 // * HouseState *
 // *********
 @BelongsToContract(HouseContract.class)
-public class HouseState implements QueryableState {
+public class HouseState implements ContractState {
 
     // Properties of House
     private final String address;
@@ -43,28 +44,6 @@ public class HouseState implements QueryableState {
     @Override
     public List<AbstractParty> getParticipants() {
         return ImmutableList.of(owner, registrar);
-    }
-
-    @NotNull
-    @Override
-    public PersistentState generateMappedObject(@NotNull MappedSchema schema) {
-        if (schema instanceof HouseSchemaV1) {
-            return new PersistentHouse(
-                    this.address,
-                    this.totalAreaInSqft,
-                    this.carpetAreaInSqft,
-                    this.floor,
-                    this.owner
-            );
-        } else {
-            throw new IllegalArgumentException("Unrecognised schema");
-        }
-    }
-
-    @NotNull
-    @Override
-    public Iterable<MappedSchema> supportedSchemas() {
-        return ImmutableList.of(new HouseSchemaV1());
     }
 
     public String getAddress() {
