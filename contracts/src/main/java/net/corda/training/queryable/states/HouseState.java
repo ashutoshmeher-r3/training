@@ -19,7 +19,7 @@ import java.util.List;
 // * HouseState *
 // *********
 @BelongsToContract(HouseContract.class)
-public class HouseState implements QueryableState {
+public class HouseState implements ContractState {
 
     // Properties of House
     private final String address;
@@ -68,27 +68,5 @@ public class HouseState implements QueryableState {
 
     public Party getRegistrar() {
         return registrar;
-    }
-
-    @NotNull
-    @Override
-    public PersistentState generateMappedObject(@NotNull MappedSchema schema) {
-        if(schema instanceof HouseSchemaV1){
-            return new PersistentHouse(
-                    this.address,
-                    this.totalAreaInSqft,
-                    this.carpetAreaInSqft,
-                    this.floor,
-                    this.owner
-            );
-        }else{
-            throw new IllegalArgumentException("Unsupported Schema");
-        }
-    }
-
-    @NotNull
-    @Override
-    public Iterable<MappedSchema> supportedSchemas() {
-        return ImmutableList.of(new HouseSchemaV1());
     }
 }

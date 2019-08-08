@@ -27,30 +27,31 @@ public class QueryHouseFlow extends FlowLogic<List<PersistentHouse>> {
 
     @Override
     public List<PersistentHouse> call() throws FlowException {
-        if(option == 1) {
-            return getServiceHub().withEntityManager((EntityManager entityManager) -> {
-                CriteriaQuery<PersistentHouse> query = entityManager.getCriteriaBuilder().createQuery(PersistentHouse.class);
-                Root<PersistentHouse> type = query.from(PersistentHouse.class);
-                query.select(type);
-                return entityManager.createQuery(query).getResultList();
-            });
-        }else{
-            String nativeQuery = "SELECT * FROM HOUSE_DETAIL";
-            try {
-                List<PersistentHouse> resultList  = new ArrayList<>();
-                ResultSet rs = getServiceHub().jdbcSession().prepareStatement(nativeQuery).executeQuery();
-                while (rs.next()){
-                    PersistentHouse house = new PersistentHouse(rs.getString(3), rs.getInt(4),
-                            rs.getInt(5), rs.getInt(7),
-                            getServiceHub().getNetworkMapCache().getPeerByLegalName(CordaX500Name.parse(rs.getString(6))));
-                    resultList.add(house);
-                }
-
-                return resultList;
-            }catch (SQLException se){
-                throw new FlowException(se.getCause());
-            }
-        }
+//        if(option == 1) {
+//            return getServiceHub().withEntityManager((EntityManager entityManager) -> {
+//                CriteriaQuery<PersistentHouse> query = entityManager.getCriteriaBuilder().createQuery(PersistentHouse.class);
+//                Root<PersistentHouse> type = query.from(PersistentHouse.class);
+//                query.select(type);
+//                return entityManager.createQuery(query).getResultList();
+//            });
+//        }else{
+//            String nativeQuery = "SELECT * FROM HOUSE_DETAIL";
+//            try {
+//                List<PersistentHouse> resultList  = new ArrayList<>();
+//                ResultSet rs = getServiceHub().jdbcSession().prepareStatement(nativeQuery).executeQuery();
+//                while (rs.next()){
+//                    PersistentHouse house = new PersistentHouse(rs.getString(3), rs.getInt(4),
+//                            rs.getInt(5), rs.getInt(7),
+//                            getServiceHub().getNetworkMapCache().getPeerByLegalName(CordaX500Name.parse(rs.getString(6))));
+//                    resultList.add(house);
+//                }
+//
+//                return resultList;
+//            }catch (SQLException se){
+//                throw new FlowException(se.getCause());
+//            }
+//        }
+        return null;
     }
 
 }
