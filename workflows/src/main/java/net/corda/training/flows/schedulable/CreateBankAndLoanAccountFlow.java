@@ -8,6 +8,7 @@ import net.corda.core.identity.Party;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.core.transactions.TransactionBuilder;
 import net.corda.training.queryable.contracts.HouseContract;
+import net.corda.training.schedulable.contracts.AccountContract;
 import net.corda.training.schedulable.states.BankAccount;
 import net.corda.training.schedulable.states.LoanAccount;
 
@@ -47,7 +48,7 @@ public class CreateBankAndLoanAccountFlow {
             TransactionBuilder transactionBuilder = new TransactionBuilder(notary)
                     .addOutputState(new BankAccount(accountBalance, accountNumber, getOurIdentity(), Instant.now().plusMillis(30000)))
                     .addOutputState(new LoanAccount(accountNumber, loanAmount, installments, loanAmount, installments, lender, getOurIdentity()))
-                    .addCommand(new Command<>(new HouseContract.Commands.IssueRegistration(), issuer.getOwningKey()));
+                    .addCommand(new Command<>(new AccountContract.Commands.CreateAccount(), issuer.getOwningKey()));
 
             transactionBuilder.verify(getServiceHub());
 

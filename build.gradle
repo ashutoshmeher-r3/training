@@ -82,6 +82,7 @@ dependencies {
     // CorDapp dependencies.
     cordapp project(":workflows")
     cordapp project(":contracts")
+    cordapp project(":oracle-service")
 
     cordaCompile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j_version}"
     cordaCompile "org.apache.logging.log4j:log4j-web:${log4j_version}"
@@ -93,8 +94,6 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         projectCordapp {
             deploy = false
         }
-        cordapp project(':contracts')
-        cordapp project(':workflows')
     }
     node {
         name "O=Notary,L=London,C=GB"
@@ -107,7 +106,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         extraConfig = ['h2Settings.address' : 'localhost:20040']
     }
     node {
-        name "O=Issuer,L=London,C=GB"
+        name "O=PartyA,L=London,C=GB"
         p2pPort 10005
         rpcSettings {
             address("localhost:10006")
@@ -115,9 +114,11 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
         extraConfig = ['h2Settings.address' : 'localhost:20041']
+        cordapp project(':contracts')
+        cordapp project(':workflows')
     }
     node {
-        name "O=Owner,L=New York,C=US"
+        name "O=PartyB,L=New York,C=US"
         p2pPort 10008
         rpcSettings {
             address("localhost:10009")
@@ -125,6 +126,20 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
         extraConfig = ['h2Settings.address' : 'localhost:20042']
+        cordapp project(':contracts')
+        cordapp project(':workflows')
+    }
+    node {
+        name "O=Oracle,L=New York,C=US"
+        p2pPort 10011
+        rpcSettings {
+            address("localhost:10012")
+            adminAddress("localhost:10052")
+        }
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+        extraConfig = ['h2Settings.address' : 'localhost:20043']
+        cordapp project(':oracle-service')
+        cordapp project(':workflows')
     }
 }
 

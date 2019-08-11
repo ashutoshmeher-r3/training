@@ -17,7 +17,6 @@ import java.util.List;
 
 @SchedulableFlow
 @InitiatingFlow
-@StartableByRPC
 public class ScheduledPaymentFlow extends FlowLogic<SignedTransaction> {
 
     private final long accountNumber;
